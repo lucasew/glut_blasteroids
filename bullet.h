@@ -43,7 +43,7 @@ Bullet_t* gb_Bullet__from_ship(Spaceship_t* ship);
  * @param this O objeto bala a ser obtido o valor
  * @return O raio de perigo
  */
-float gb_Bullet__get_danger_radius(Bullet_t *this);
+double gb_Bullet__get_danger_radius(Bullet_t *this);
 
 /**
  * O objeto aínda é válido?

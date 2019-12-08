@@ -21,7 +21,7 @@ void gb_Object__destroy(Packet_t *p) {
 }
 
 void gb_Object__draw(Packet_t *p) {
-    p->fn->draw(&p->payload);
+    p->fn->draw(p->payload);
 }
 
 void gb_Object__update(Packet_t *p, float steps) {

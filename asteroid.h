@@ -47,7 +47,7 @@ Asteroid_t* gb_Asteroid__new_random();
  * @param this O objeto em que essa info vai ser obtida
  * @return Quantidade mínima de pixels de distância entre outro objeto
  */
-float gb_Asteroid__get_danger_radius(Asteroid_t *this);
+double gb_Asteroid__get_danger_radius(Asteroid_t *this);
 
 /**
  * Verifica se o objeto aínda é valido, ex: Asteroide destruido

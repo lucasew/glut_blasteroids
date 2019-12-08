@@ -38,7 +38,7 @@ void gb_Bullet__update(Bullet_t *this, float step) {
     this->position = gb_Point__go_headed(this->position, this->heading, this->speed);
 }
 
-float gb_Bullet__get_danger_radius(Bullet_t *this) {
+double gb_Bullet__get_danger_radius(Bullet_t *this) {
     // TODO: Tunar
     return 1;
 }
