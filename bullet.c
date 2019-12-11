@@ -11,6 +11,7 @@
 #include "bullet.h"
 #include "object.h"
 #include "spaceship.h"
+#include "constants.h"
 
 
 Bullet_t* gb_Bullet__new(Point_t position, Color_t color, float speed, float heading, float power) {
@@ -26,7 +27,7 @@ Bullet_t* gb_Bullet__new(Point_t position, Color_t color, float speed, float hea
 
 Bullet_t* gb_Bullet__from_ship(Spaceship_t* ship) {
     Color_t color = gb_Color__new(rand()%256, rand()%256, rand()%256);
-    return gb_Bullet__new(ship->position, color, (float)(rand()%20), ship->heading, rand()%100);
+    return gb_Bullet__new(ship->position, color, (float)(rand()%200), ship->heading, rand()%100);
 }
 
 void gb_Bullet__destroy(Bullet_t **obj) {
@@ -35,7 +36,7 @@ void gb_Bullet__destroy(Bullet_t **obj) {
 }
 
 void gb_Bullet__update(Bullet_t *this, float step) {
-    this->position = gb_Point__go_headed(this->position, this->heading, this->speed);
+    this->position = gb_Point__go_headed(this->position, this->heading, this->speed*tick_size);
 }
 
 float gb_Bullet__get_danger_radius(Bullet_t *this) {

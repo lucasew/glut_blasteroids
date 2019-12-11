@@ -28,7 +28,7 @@ Asteroid_t* gb_Asteroid__new(Point_t position, Color_t color, float scale, float
 Asteroid_t* gb_Asteroid__new_random() {
     Point_t p = gb_Point__new(rand()%SCREEN_WIDTH, rand()%SCREEN_HEIGHT);
     Color_t c = gb_Color__new(rand()%255, rand()%255, rand()%255);
-    return gb_Asteroid__new(p, c, (float)(rand()%5), 20, 0, (float)(rand()%10), rand()%200);
+    return gb_Asteroid__new(p, c, (float)(rand()%5), 200, 0, (float)(rand()%100), rand()%200);
 }
 
 void gb_Asteroid__destroy(Asteroid_t **obj) {
@@ -37,8 +37,8 @@ void gb_Asteroid__destroy(Asteroid_t **obj) {
 }
 
 void gb_Asteroid__update(Asteroid_t *this, float step) {
-    this->heading += this->rot_velocity;
-    this->position = gb_Point__go_headed(this->position, this->heading, this->speed);
+    this->heading += this->rot_velocity*tick_size;
+    this->position = gb_Point__go_headed(this->position, this->heading, this->speed*tick_size);
 }
 
 float gb_Asteroid__get_danger_radius(Asteroid_t *this) {
