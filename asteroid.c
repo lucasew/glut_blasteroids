@@ -36,7 +36,7 @@ void gb_Asteroid__destroy(Asteroid_t **obj) {
     *obj = NULL;
 }
 
-void gb_Asteroid__update(Asteroid_t *this, float step) {
+void gb_Asteroid__update(Asteroid_t *this) {
     this->heading += this->rot_velocity*tick_size;
     this->position = gb_Point__go_headed(this->position, this->heading, this->speed*tick_size);
 }
@@ -93,7 +93,7 @@ float gb_Asteroid__get_damage() {
 }
 
 void gb_Asteroid__hurt(Asteroid_t *a, float amount) {
-    a->health -= amount;
+    a->health -= amount*tick_size;
 }
 
 Methods_t asteroid_methods = {

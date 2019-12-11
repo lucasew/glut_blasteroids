@@ -24,7 +24,7 @@ typedef struct Methods {
     void (*draw)(OBJECT);
     void (*update)(OBJECT);
     Point_t (*get_point)(OBJECT);
-    float (*get_damage)();
+    float (*get_damage)(OBJECT);
     void (*hurt)(OBJECT, float amount);
 } Methods_t;
 

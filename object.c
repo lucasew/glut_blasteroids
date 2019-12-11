@@ -33,7 +33,7 @@ Point_t gb_Object__get_point(Packet_t *p) {
 }
 
 float gb_Object__get_damage(Packet_t *p) {
-    return p->fn->get_damage();
+    return p->fn->get_damage(p->payload);
 }
 
 void gb_Object__hurt(Packet_t *p, float amount) {

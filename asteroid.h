@@ -73,7 +73,7 @@ void gb_Asteroid__draw(Asteroid_t *this);
  * @param this O objeto a ser atualizado
  * @param step Quantidade de ticks a serem percorridos
  */
-void gb_Asteroid__update(Asteroid_t *this, float step);
+void gb_Asteroid__update(Asteroid_t *this);
 
 /**
  * Transforma em um pacote seguindo a interface

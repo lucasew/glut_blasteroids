@@ -77,7 +77,7 @@ void gb_Spaceship__cmd_right(Spaceship_t *ship) {
 
 void nop(void* ptr, float n){}
 
-int gb_Spaceship__get_damage() {
+float gb_Spaceship__get_damage(Spaceship_t *ship) {
     return 1;
 }
 

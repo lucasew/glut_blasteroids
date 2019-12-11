@@ -91,13 +91,11 @@ int gb_ObjectList__check_collision(ObjectList_t **this) {
                     gb_Object__get_point(inner->this),
                     gb_Object__get_point(outer->this)
             );
-            printf("Distance %.2f Hurt %.2f\n", distance, hurtDistance);
+            //printf("Distance %.2f Hurt %.2f\n", distance, hurtDistance);
             if (distance < hurtDistance) {
-                printf("Hurt %s -> %s.\n", inner->this->fn->type, outer->this->fn->type) ;
                 // Só de um lado ou teremos o dobro de hp sendo perdido
                 float damage = gb_Object__get_damage(inner->this);
-                printf("DAMAGE: %.1f\n", damage);
-                printf("Quantidade %.1f\n", damage);
+                printf("Hurt %s -> %s %.1f HP.\n", inner->this->fn->type, outer->this->fn->type, damage) ;
                 gb_Object__hurt(outer->this, damage);
                 collisions++;
             }

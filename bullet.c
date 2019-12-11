@@ -70,7 +70,7 @@ float gb_Bullet__get_damage(Bullet_t *b) {
 }
 
 void gb_Bullet__hurt(Bullet_t *b, float amount) {
-    b->power -= amount;
+    b->power -= amount*tick_size;
 }
 
 Methods_t bullet_methods = {
