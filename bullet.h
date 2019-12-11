@@ -78,5 +78,10 @@ void gb_Bullet__update(Bullet_t *this, float step);
  */
 Packet_t gb_Bullet__as_packet(Bullet_t *obj);
 
+/**
+ * Dado um pacote, este pacote encapsula uma bala?
+ * @param pkt Pacote a ser testado
+ * @return É uma bala?
+ */
 int gb_Packet__is_bullet(Packet_t* pkt);
 #endif //GL_BLASTEROIDS_BULLET_H

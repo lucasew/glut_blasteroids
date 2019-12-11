@@ -7,7 +7,6 @@
 #include "color.h"
 #include "point.h"
 #include "object.h"
-#include "math_utils.h"
 
 #include "spaceship.h"
 
@@ -41,6 +40,12 @@ void gb_Spaceship__destroy(Spaceship_t **ship) {
 int gb_Spaceship__is_valid(Spaceship_t *ship) {
     return ship->health > 0;
 }
+
+#define draw_line(xa, ya, xb, yb) \
+    glBegin(GL_LINES); \
+        glVertex2f(xa, ya); \
+        glVertex2f(xb, yb); \
+    glEnd();
 
 void gb_Spaceship__draw(Spaceship_t *ship) {
     glPushMatrix();

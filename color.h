@@ -7,6 +7,9 @@
 
 #include <GL/gl.h>
 
+/**
+ * Definição de cor
+ */
 typedef struct Color {
     GLbyte r;
     GLbyte g;

@@ -102,5 +102,11 @@ Methods_t spaceship_methods;
  */
 Packet_t gb_Spaceship__as_packet(Spaceship_t *obj);
 
+/**
+ * Dado um pacote, checa se este é uma nave
+ * @param pkt Pacote a ser testado
+ * @return É uma nave?
+ */
 int gb_Packet__is_spaceship(Packet_t* pkt);
+
 #endif //GL_BLASTEROIDS_SPACESHIP_H

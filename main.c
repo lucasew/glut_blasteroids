@@ -19,13 +19,21 @@ pthread_mutex_t lock;
 ObjectList_t **elements = NULL;
 Spaceship_t *spaceship = NULL;
 int stop = 0;
-int window = 0;
 
+/**
+ * Função que limpa a casa quando o programa fecha, é invocada por um hook setado pela função atexit
+ */
 void cleanup() {
     gb_ObjectList__destroy(elements);
     pthread_mutex_destroy(&lock);
 }
 
+/**
+ * Função que processa os eventos especiais de teclado
+ * @param key Tecla pressionada
+ * @param x Não utilizado, coisa do glut
+ * @param y Não utilizado, coisa do glut
+ */
 void special_keyboard(int key, int x, int y) {
     gb_lock();
     switch (key) {
@@ -46,6 +54,12 @@ void special_keyboard(int key, int x, int y) {
     glutPostRedisplay(); // Se chegar aqui então redesenha
 }
 
+/**
+ * Função que interpreta os eventos recebidos do teclado
+ * @param key Tecla pressionada
+ * @param x Não utilizado, coisa do glut
+ * @param y Não utilizado, coisa do glut
+ */
 void keyboard(unsigned char key, int x, int y) {
     gb_lock();
     switch (key) {
@@ -60,6 +74,9 @@ void keyboard(unsigned char key, int x, int y) {
     gb_unlock();
 }
 
+/**
+ * Função de desenho
+ */
 void draw() {
     gb_lock();
     printf("DRAW\n");
@@ -76,6 +93,10 @@ void draw() {
     gb_unlock();
 }
 
+/**
+ * Função de atualização de estado
+ * @param v Não utilizado, coisa do glut
+ */
 void ticker(int v) {
     if (stop) {
         return;
@@ -88,6 +109,7 @@ void ticker(int v) {
     printf("VIDA_NAVE %.1f\n", spaceship->health);
     gb_unlock();
 }
+
 void gb_lock() {
     pthread_mutex_lock(&lock);
 }
@@ -96,6 +118,12 @@ void gb_unlock() {
     pthread_mutex_unlock(&lock);
 }
 
+/**
+ * Função de inicio
+ * @param argc Número de parâmetros recebidos
+ * @param argv Vetor de string dos parâmetros recebidos
+ * @return
+ */
 int main(int argc, char **argv) {
     srand(time(NULL)); // Adicionando bagunça nisso
     assert(!pthread_mutex_init(&lock, NULL));
@@ -112,7 +140,7 @@ int main(int argc, char **argv) {
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutInitWindowSize(SCREEN_WIDTH, SCREEN_HEIGHT);
     atexit(cleanup);
-    window = glutCreateWindow("GL Blasteroids");
+    glutCreateWindow("GL Blasteroids");
     glutDisplayFunc(draw);
     glutSpecialFunc(special_keyboard);
     glutKeyboardFunc(keyboard);

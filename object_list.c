@@ -8,7 +8,6 @@
 
 #include "object_list.h"
 #include "bullet.h"
-#include "constants.h"
 
 ObjectList_t **gb_ObjectList__new() {
     ObjectList_t ** ret = malloc(sizeof(ObjectList_t*));

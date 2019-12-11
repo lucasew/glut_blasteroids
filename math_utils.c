@@ -3,7 +3,6 @@
 //
 
 #include <math.h>
-#include "point.h"
 
 /**
  * Transforma graus em radianos

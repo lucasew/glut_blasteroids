@@ -15,6 +15,9 @@ extern int SCREEN_WIDTH;
  */
 extern int SCREEN_HEIGHT;
 
+/**
+ * Tempo de cada frame, delay usado entre cada iteração do jogo.
+ */
 float tick_size;
 
 #endif //GL_BLASTEROIDS_CONSTANTS_H

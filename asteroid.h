@@ -13,6 +13,9 @@
  */
 extern Methods_t asteroid_methods;
 
+/**
+ * Definição de Asteróide
+ */
 typedef struct Asteroid {
     float scale;
     float rot_velocity;
@@ -82,5 +85,11 @@ void gb_Asteroid__update(Asteroid_t *this);
  */
 Packet_t gb_Asteroid__as_packet(Asteroid_t *obj);
 
+/**
+ * Dado um pacote, este pacote encapsula um asteroide?
+ * @param pkt Pacote a ser testado
+ * @return É um asteróide?
+ */
 int gb_Packet__is_asteroid(Packet_t* pkt);
+
 #endif //GL_BLASTEROIDS_ASTEROID_H

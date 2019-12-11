@@ -12,10 +12,4 @@
  */
 double gb_deg2rad(double deg);
 
-#define draw_line(xa, ya, xb, yb) \
-    glBegin(GL_LINES); \
-        glVertex2f(xa, ya); \
-        glVertex2f(xb, yb); \
-    glEnd();
-
 #endif //GL_BLASTEROIDS_MATH_UTILS_H

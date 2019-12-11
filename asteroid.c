@@ -9,7 +9,6 @@
 #include "color.h"
 #include "object.h"
 #include "constants.h"
-#include "math_utils.h"
 
 #include "asteroid.h"
 

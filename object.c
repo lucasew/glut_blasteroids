@@ -2,7 +2,6 @@
 // Created by lucas59356 on 19/11/2019.
 //
 #include <stdio.h>
-#include <stdlib.h>
 #include "object.h"
 
 float gb_Object__get_danger_radius(Packet_t *p) {
