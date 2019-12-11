@@ -67,6 +67,6 @@ void gb_ObjectList__draw_all(ObjectList_t **this);
  * @param this A lista
  * @param ticks Quantos ticks atualizar todos os elementos
  */
-void gb_ObjectList__tick_all(ObjectList_t **this, float ticks);
+void gb_ObjectList__tick_all(ObjectList_t **this);
 
 #endif //GL_BLASTEROIDS_OBJECT_LIST_H

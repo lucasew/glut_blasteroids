@@ -8,6 +8,7 @@
 
 #include "object_list.h"
 #include "bullet.h"
+#include "constants.h"
 
 ObjectList_t **gb_ObjectList__new() {
     ObjectList_t ** ret = malloc(sizeof(ObjectList_t*));
@@ -64,7 +65,7 @@ void gb_ObjectList__draw_all(ObjectList_t **this) {
 }
 
 
-int gb_ObjectList__check_collision(ObjectList_t **this, float ticks) {
+int gb_ObjectList__check_collision(ObjectList_t **this) {
     if (this == NULL) {
         return 0;
     }
@@ -96,9 +97,8 @@ int gb_ObjectList__check_collision(ObjectList_t **this, float ticks) {
                 // Só de um lado ou teremos o dobro de hp sendo perdido
                 float damage = gb_Object__get_damage(inner->this);
                 printf("DAMAGE: %.1f\n", damage);
-                float hurtAmount = ticks*damage;
-                printf("Quantidade %.1f\n", hurtAmount);
-                gb_Object__hurt(outer->this, hurtAmount);
+                printf("Quantidade %.1f\n", damage);
+                gb_Object__hurt(outer->this, damage);
                 collisions++;
             }
             enditer:
@@ -111,7 +111,7 @@ int gb_ObjectList__check_collision(ObjectList_t **this, float ticks) {
     return collisions;
 }
 
-void gb_ObjectList__tick_all(ObjectList_t **this, float ticks) {
+void gb_ObjectList__tick_all(ObjectList_t **this) {
     if (this == NULL) {
         return;
     }
@@ -121,10 +121,10 @@ void gb_ObjectList__tick_all(ObjectList_t **this, float ticks) {
     ObjectList_t *dmy = *this;
     ObjectList_t **cur = &dmy;
     while (*cur != NULL) {
-        gb_Object__update(PACKETOF(cur), ticks);
+        gb_Object__update(PACKETOF(cur));
         *cur = (*cur)->next;
     }
-    if (gb_ObjectList__check_collision(this, ticks)) {
+    if (gb_ObjectList__check_collision(this)) {
         gb_ObjectList__gc(this);
     }
 }

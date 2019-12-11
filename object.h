@@ -22,7 +22,7 @@ typedef struct Methods {
     int (*is_valid)(OBJECT);
     void (*destroy)(OBJECT*);
     void (*draw)(OBJECT);
-    void (*update)(OBJECT, float steps);
+    void (*update)(OBJECT);
     Point_t (*get_point)(OBJECT);
     float (*get_damage)();
     void (*hurt)(OBJECT, float amount);
@@ -74,7 +74,7 @@ void gb_Object__draw(Packet_t *p);
  * @param p Objeto a ser atualizado
  * @param steps Quantidade de ticks
  */
-void gb_Object__update(Packet_t *p, float steps);
+void gb_Object__update(Packet_t *p);
 float gb_Object__get_damage(Packet_t *p);
 void gb_Object__hurt(Packet_t *p, float amount);
 

@@ -15,4 +15,6 @@ extern int SCREEN_WIDTH;
  */
 extern int SCREEN_HEIGHT;
 
+float tick_size;
+
 #endif //GL_BLASTEROIDS_CONSTANTS_H

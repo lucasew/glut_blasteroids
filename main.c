@@ -81,10 +81,10 @@ void ticker(int v) {
         return;
     }
     gb_lock();
-    gb_ObjectList__tick_all(elements, 0.1);
+    gb_ObjectList__tick_all(elements);
     printf("Quandidade de elementos: %i\n", gb_ObjectList__len(elements));
     glutPostRedisplay();
-    glutTimerFunc(100, ticker, 0); // Fica se chamando infinitamente, bendito scheduler do glut <3
+    glutTimerFunc(tick_size*1000, ticker, 0); // Fica se chamando infinitamente, bendito scheduler do glut <3
     printf("VIDA_NAVE %.1f\n", spaceship->health);
     gb_unlock();
 }

@@ -24,8 +24,8 @@ void gb_Object__draw(Packet_t *p) {
     p->fn->draw(p->payload);
 }
 
-void gb_Object__update(Packet_t *p, float steps) {
-    p->fn->update(p->payload, steps);
+void gb_Object__update(Packet_t *p) {
+    p->fn->update(p->payload);
 }
 
 Point_t gb_Object__get_point(Packet_t *p) {
