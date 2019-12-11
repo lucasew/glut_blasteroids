@@ -37,6 +37,7 @@ void gb_Bullet__destroy(Bullet_t **obj) {
 
 void gb_Bullet__update(Bullet_t *this, float step) {
     this->position = gb_Point__go_headed(this->position, this->heading, this->speed*tick_size);
+    this->power -= tick_size;
 }
 
 float gb_Bullet__get_danger_radius(Bullet_t *this) {
