@@ -13,7 +13,7 @@
 #include "spaceship.h"
 
 
-Bullet_t* gb_Bullet__new(Point_t position, Color_t color, float speed, float heading, int power) {
+Bullet_t* gb_Bullet__new(Point_t position, Color_t color, float speed, float heading, float power) {
    Bullet_t* ret = calloc(1, sizeof(Bullet_t));
    assert(ret);
    ret->color = color;
@@ -38,13 +38,13 @@ void gb_Bullet__update(Bullet_t *this, float step) {
     this->position = gb_Point__go_headed(this->position, this->heading, this->speed);
 }
 
-double gb_Bullet__get_danger_radius(Bullet_t *this) {
+float gb_Bullet__get_danger_radius(Bullet_t *this) {
     // TODO: Tunar
     return 1;
 }
 
 void gb_Bullet__draw(Bullet_t *this) {
-    printf("Draw bullet");
+    // printf("Draw bullet");
     glPushMatrix();
         glTranslated(this->position.x, this->position.y, 0);
         glPointSize(4);
@@ -63,11 +63,11 @@ Point_t gb_Bullet__get_point(Bullet_t *b) {
     return b->position;
 }
 
-int gb_Bullet__get_damage(Bullet_t *b) {
+float gb_Bullet__get_damage(Bullet_t *b) {
     return b->power;
 }
 
-void gb_Bullet__hurt(Bullet_t *b, int amount) {
+void gb_Bullet__hurt(Bullet_t *b, float amount) {
     b->power -= amount;
 }
 
@@ -89,4 +89,8 @@ Packet_t gb_Bullet__as_packet(Bullet_t *b) {
             .payload = b
     };
     return ret;
+}
+
+int gb_Packet__is_bullet(Packet_t* pkt) {
+    return pkt->fn->type == bullet_methods.type;
 }

@@ -13,7 +13,7 @@
 
 #include "asteroid.h"
 
-Asteroid_t* gb_Asteroid__new(Point_t position, Color_t color, float scale, float rot_velocity, float heading, float speed, int health) {
+Asteroid_t* gb_Asteroid__new(Point_t position, Color_t color, float scale, float rot_velocity, float heading, float speed, float health) {
     Asteroid_t* ret = calloc(1, sizeof(Asteroid_t));
     ret->color = color;
     ret->heading = heading;
@@ -41,7 +41,7 @@ void gb_Asteroid__update(Asteroid_t *this, float step) {
     this->position = gb_Point__go_headed(this->position, this->heading, this->speed);
 }
 
-double gb_Asteroid__get_danger_radius(Asteroid_t *this) {
+float gb_Asteroid__get_danger_radius(Asteroid_t *this) {
     // TODO: Tunar
     return 22*this->scale;
 }
@@ -70,6 +70,7 @@ void gb_Asteroid__draw(Asteroid_t *this) {
         glColor3b(this->color.r, this->color.g, this->color.b);
         glTranslated(this->position.x, this->position.y, 0);
         glRotatef(this->heading, 0, 0, 1);
+        glScalef(this->scale, this->scale, 0) ;
         glLineWidth(1);
         glBegin(GL_POLYGON);
             for (int i = 0; i <= 12; i++) {
@@ -87,13 +88,12 @@ Point_t gb_Asteroid__get_point(Asteroid_t *a) {
     return a->position;
 }
 
-int gb_Asteroid__get_damage() {
+float gb_Asteroid__get_damage() {
     return 1;
 }
 
-void gb_Asteroid__hurt(Asteroid_t *a, int amount) {
+void gb_Asteroid__hurt(Asteroid_t *a, float amount) {
     a->health -= amount;
-    printf("Recebido dano de %i HP\n", amount);
 }
 
 Methods_t asteroid_methods = {
@@ -115,4 +115,8 @@ Packet_t gb_Asteroid__as_packet(Asteroid_t *obj) {
             .payload = obj
     };
     return ret;
+}
+
+int gb_Packet__is_asteroid(Packet_t* pkt) {
+    return pkt->fn->type == asteroid_methods.type;
 }

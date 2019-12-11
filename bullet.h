@@ -20,7 +20,7 @@ extern Methods_t bullet_methods;
 typedef struct Bullet {
     float speed;
     float heading;
-    int power;
+    float power;
     Point_t position;
     Color_t color;
 } Bullet_t;
@@ -34,7 +34,7 @@ typedef struct Bullet {
  * @param power Quantidade de dano que pode dar
  * @return O objeto construido
  */
-Bullet_t* gb_Bullet__new(Point_t position, Color_t color, float speed, float heading, int power);
+Bullet_t* gb_Bullet__new(Point_t position, Color_t color, float speed, float heading, float power);
 
 Bullet_t* gb_Bullet__from_ship(Spaceship_t* ship);
 
@@ -43,7 +43,7 @@ Bullet_t* gb_Bullet__from_ship(Spaceship_t* ship);
  * @param this O objeto bala a ser obtido o valor
  * @return O raio de perigo
  */
-double gb_Bullet__get_danger_radius(Bullet_t *this);
+float gb_Bullet__get_danger_radius(Bullet_t *this);
 
 /**
  * O objeto aínda é válido?
@@ -78,5 +78,5 @@ void gb_Bullet__update(Bullet_t *this, float step);
  */
 Packet_t gb_Bullet__as_packet(Bullet_t *obj);
 
-
+int gb_Packet__is_bullet(Packet_t* pkt);
 #endif //GL_BLASTEROIDS_BULLET_H

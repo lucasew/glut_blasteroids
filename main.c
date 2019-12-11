@@ -11,6 +11,7 @@
 #include "constants.h"
 #include "asteroid.h"
 #include "bullet.h"
+#include "main.h"
 
 
 pthread_mutex_t lock;
@@ -26,6 +27,7 @@ void cleanup() {
 }
 
 void special_keyboard(int key, int x, int y) {
+    gb_lock();
     switch (key) {
         case GLUT_KEY_UP:
             gb_Spaceship__cmd_up(spaceship);
@@ -40,10 +42,12 @@ void special_keyboard(int key, int x, int y) {
             gb_Spaceship__cmd_right(spaceship);
             break;
     }
+    gb_unlock();
     glutPostRedisplay(); // Se chegar aqui então redesenha
 }
 
 void keyboard(unsigned char key, int x, int y) {
+    gb_lock();
     switch (key) {
         case ' ':
             gb_ObjectList__push(elements, gb_Bullet__as_packet(gb_Bullet__from_ship(spaceship)));
@@ -53,9 +57,11 @@ void keyboard(unsigned char key, int x, int y) {
             break;
     }
     glutPostRedisplay();
+    gb_unlock();
 }
 
 void draw() {
+    gb_lock();
     printf("DRAW\n");
     glClear(GL_COLOR_BUFFER_BIT);
     glMatrixMode(GL_PROJECTION);
@@ -67,16 +73,20 @@ void draw() {
     gb_ObjectList__draw_all(elements); // Basicamente
     glFlush();
     glutSwapBuffers();
+    gb_unlock();
 }
 
 void ticker(int v) {
     if (stop) {
         return;
     }
+    gb_lock();
     gb_ObjectList__tick_all(elements, 0.1);
     printf("Quandidade de elementos: %i\n", gb_ObjectList__len(elements));
     glutPostRedisplay();
     glutTimerFunc(100, ticker, 0); // Fica se chamando infinitamente, bendito scheduler do glut <3
+    printf("VIDA_NAVE %.1f\n", spaceship->health);
+    gb_unlock();
 }
 void gb_lock() {
     pthread_mutex_lock(&lock);

@@ -18,7 +18,7 @@ typedef struct Asteroid {
     float rot_velocity;
     float heading;
     float speed;
-    int health;
+    float health;
     Point_t position;
     Color_t color;
 } Asteroid_t;
@@ -34,7 +34,7 @@ typedef struct Asteroid {
  * @param health HP do objeto
  * @return O objeto construido
  */
-Asteroid_t* gb_Asteroid__new(Point_t position, Color_t color, float scale, float rot_velocity, float heading, float speed, int health);
+Asteroid_t* gb_Asteroid__new(Point_t position, Color_t color, float scale, float rot_velocity, float heading, float speed, float health);
 
 /**
  * Cria um novo objeto asteroide utilizando parâmetros aleatórios
@@ -47,7 +47,7 @@ Asteroid_t* gb_Asteroid__new_random();
  * @param this O objeto em que essa info vai ser obtida
  * @return Quantidade mínima de pixels de distância entre outro objeto
  */
-double gb_Asteroid__get_danger_radius(Asteroid_t *this);
+float gb_Asteroid__get_danger_radius(Asteroid_t *this);
 
 /**
  * Verifica se o objeto aínda é valido, ex: Asteroide destruido
@@ -82,4 +82,5 @@ void gb_Asteroid__update(Asteroid_t *this, float step);
  */
 Packet_t gb_Asteroid__as_packet(Asteroid_t *obj);
 
+int gb_Packet__is_asteroid(Packet_t* pkt);
 #endif //GL_BLASTEROIDS_ASTEROID_H

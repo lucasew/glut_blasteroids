@@ -14,7 +14,7 @@
 const float spaceship_heading_step = 10;
 const float spaceship_speed = 10;
 
-Spaceship_t* gb_Spaceship__new(Point_t position, Color_t color, float heading, int health) {
+Spaceship_t* gb_Spaceship__new(Point_t position, Color_t color, float heading, float health) {
     struct Spaceship *ret = calloc(1, sizeof(struct Spaceship));
     ret->position = position;
     ret->color = color;
@@ -81,7 +81,8 @@ int gb_Spaceship__get_damage() {
     return 1;
 }
 
-void gb_Spaceship__hurt(Spaceship_t *ship, int amount) {
+void gb_Spaceship__hurt(Spaceship_t *ship, float amount) {
+    printf("Spaceship hurt: %.1f\n", amount);
     ship->health -= amount;
 }
 
@@ -107,4 +108,8 @@ Packet_t gb_Spaceship__as_packet(Spaceship_t *ship) {
             .fn = &spaceship_methods
     };
     return ret;
+}
+
+int gb_Packet__is_spaceship(Packet_t* pkt) {
+    return pkt->fn->type == spaceship_methods.type;
 }

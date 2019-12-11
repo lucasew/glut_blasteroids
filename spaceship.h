@@ -25,7 +25,7 @@ typedef struct Spaceship {
     Color_t color;
     Point_t position;
     float heading;
-    int health;
+    float health;
 } Spaceship_t;
 
 /**
@@ -36,7 +36,7 @@ typedef struct Spaceship {
  * @param health HP da nave
  * @return O objeto nave com os dados indicados
  */
-Spaceship_t* gb_Spaceship__new(Point_t position, Color_t color, float heading, int health);
+Spaceship_t* gb_Spaceship__new(Point_t position, Color_t color, float heading, float health);
 
 /**
  * Cria um novo objeto nave randômico
@@ -94,6 +94,7 @@ void gb_Spaceship__destroy(Spaceship_t **ship);
  */
 void gb_Spaceship__draw(Spaceship_t *ship);
 
+Methods_t spaceship_methods;
 /**
  * Encapsula o objeto nave em um objeto pacote, gambiarra de interface
  * @param obj Objeto nave a ser encapsulado
@@ -101,4 +102,5 @@ void gb_Spaceship__draw(Spaceship_t *ship);
  */
 Packet_t gb_Spaceship__as_packet(Spaceship_t *obj);
 
+int gb_Packet__is_spaceship(Packet_t* pkt);
 #endif //GL_BLASTEROIDS_SPACESHIP_H

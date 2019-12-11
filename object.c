@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include "object.h"
 
-double gb_Object__get_danger_radius(Packet_t *p) {
+float gb_Object__get_danger_radius(Packet_t *p) {
     p->fn->get_danger_radius(p->payload);
 }
 
@@ -32,11 +32,11 @@ Point_t gb_Object__get_point(Packet_t *p) {
     return p->fn->get_point(p->payload);
 }
 
-int gb_Object__get_damage(Packet_t *p) {
+float gb_Object__get_damage(Packet_t *p) {
     return p->fn->get_damage();
 }
 
-void gb_Object__hurt(Packet_t *p, int amount) {
-    printf("Enviando dano a %s\n", p->fn->type);
+void gb_Object__hurt(Packet_t *p, float amount) {
+    printf("Enviando %.1f de dano a %s\n", amount, p->fn->type);
     return p->fn->hurt(p->payload, amount);
 }

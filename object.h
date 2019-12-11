@@ -18,14 +18,14 @@
  */
 typedef struct Methods {
     const char* type;
-    double (*get_danger_radius)(OBJECT);
+    float (*get_danger_radius)(OBJECT);
     int (*is_valid)(OBJECT);
     void (*destroy)(OBJECT*);
     void (*draw)(OBJECT);
     void (*update)(OBJECT, float steps);
     Point_t (*get_point)(OBJECT);
-    int (*get_damage)();
-    void (*hurt)(OBJECT, int amount);
+    float (*get_damage)();
+    void (*hurt)(OBJECT, float amount);
 } Methods_t;
 
 /**
@@ -48,7 +48,7 @@ Point_t gb_Object__get_point(Packet_t *p);
  * @param p Pacote que fornece o dado
  * @return O raio de perigo
  */
-double gb_Object__get_danger_radius(Packet_t *p);
+float gb_Object__get_danger_radius(Packet_t *p);
 
 /**
  * Obtem se o objeto aínda é válido
@@ -75,7 +75,7 @@ void gb_Object__draw(Packet_t *p);
  * @param steps Quantidade de ticks
  */
 void gb_Object__update(Packet_t *p, float steps);
-int gb_Object__get_damage(Packet_t *p);
-void gb_Object__hurt(Packet_t *p, int amount);
+float gb_Object__get_damage(Packet_t *p);
+void gb_Object__hurt(Packet_t *p, float amount);
 
 #endif //GL_BLASTEROIDS_OBJECT_H
