@@ -1,0 +1,20 @@
+name: Testar se compila
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Instala a biblioteca
+      run: sudo apt install freeglut3-dev ninja-build
+    - name: Cria a pasta build
+      run: mkdir build
+    - name: Compila
+      working-directory: build
+      run: |
+        cmake .. -G Ninja
+        ninja
