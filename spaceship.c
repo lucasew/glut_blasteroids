@@ -88,7 +88,7 @@ float gb_Spaceship__get_damage(Spaceship_t *ship) {
 
 void gb_Spaceship__hurt(Spaceship_t *ship, float amount) {
     printf("Spaceship hurt: %.1f\n", amount);
-    ship->health -= amount*tick_size;
+    ship->health -= amount*tick_size();
 }
 
 Point_t gb_Spaceship__get_point(Spaceship_t *ship) {

@@ -23,6 +23,8 @@ const int FPS;
 /**
  * Tempo de cada frame, delay usado entre cada iteração do jogo.
  */
-const float tick_size;
+static inline float tick_size() {
+    return 1.0/FPS;
+}
 
 #endif //GL_BLASTEROIDS_CONSTANTS_H
