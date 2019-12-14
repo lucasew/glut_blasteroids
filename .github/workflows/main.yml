@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Instala a biblioteca
-      run: sudo apt install freeglut3-dev ninja
+      run: sudo apt install freeglut3-dev ninja-build
     - name: Cria a pasta build
       run: mkdir build
     - name: Compila
