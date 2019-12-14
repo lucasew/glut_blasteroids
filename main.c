@@ -113,13 +113,12 @@ void ticker(int v) {
 
 float asteroid_spawn_secs = 10;
 void asteroid_spawner(int v) {
-    while(!stop) {
-        usleep(tick_size*((float)FPS)*asteroid_spawn_secs);
-        gb_lock();
-            gb_ObjectList__push(elements, gb_Asteroid__as_packet(gb_Asteroid__new_random()));
-        gb_unlock();
-        glutPostRedisplay();
-    }
+    int tick = 1*FPS*1000;
+    glutTimerFunc((unsigned int)((float)(tick) * tick_size), asteroid_spawner, 0);
+    gb_lock();
+        gb_ObjectList__push(elements, gb_Asteroid__as_packet(gb_Asteroid__new_random()));
+    gb_unlock();
+    glutPostRedisplay();
 }
 
 void gb_lock() {
@@ -156,7 +155,7 @@ int main(int argc, char **argv) {
     glutDisplayFunc(draw);
     glutSpecialFunc(special_keyboard);
     glutKeyboardFunc(keyboard);
-    //asteroid_spawner(0);
+    asteroid_spawner(0);
     ticker(0);
     glutMainLoop();
 }
