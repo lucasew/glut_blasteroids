@@ -1,3 +1,4 @@
+#include <unistd.h>
 #include <stdio.h>
 #include <pthread.h>
 #include <assert.h>
@@ -90,6 +91,8 @@ void draw() {
     gb_ObjectList__draw_all(elements); // Basicamente
     glFlush();
     glutSwapBuffers();
+    printf("Quandidade de elementos: %i\n", gb_ObjectList__len(elements));
+    printf("VIDA_NAVE %.1f\n", spaceship->health);
     gb_unlock();
 }
 
@@ -101,13 +104,22 @@ void ticker(int v) {
     if (stop) {
         return;
     }
+    glutTimerFunc((unsigned int)(tick_size*1000), ticker, 0); // Fica se chamando infinitamente, bendito scheduler do glut <3
     gb_lock();
     gb_ObjectList__tick_all(elements);
-    printf("Quandidade de elementos: %i\n", gb_ObjectList__len(elements));
-    glutPostRedisplay();
-    glutTimerFunc(tick_size*1000, ticker, 0); // Fica se chamando infinitamente, bendito scheduler do glut <3
-    printf("VIDA_NAVE %.1f\n", spaceship->health);
     gb_unlock();
+    glutPostRedisplay();
+}
+
+float asteroid_spawn_secs = 10;
+void asteroid_spawner(int v) {
+    while(!stop) {
+        usleep(tick_size*((float)FPS)*asteroid_spawn_secs);
+        gb_lock();
+            gb_ObjectList__push(elements, gb_Asteroid__as_packet(gb_Asteroid__new_random()));
+        gb_unlock();
+        glutPostRedisplay();
+    }
 }
 
 void gb_lock() {
@@ -144,6 +156,7 @@ int main(int argc, char **argv) {
     glutDisplayFunc(draw);
     glutSpecialFunc(special_keyboard);
     glutKeyboardFunc(keyboard);
+    //asteroid_spawner(0);
     ticker(0);
     glutMainLoop();
 }

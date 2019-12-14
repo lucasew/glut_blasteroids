@@ -27,7 +27,7 @@ Asteroid_t* gb_Asteroid__new(Point_t position, Color_t color, float scale, float
 Asteroid_t* gb_Asteroid__new_random() {
     Point_t p = gb_Point__new(rand()%SCREEN_WIDTH, rand()%SCREEN_HEIGHT);
     Color_t c = gb_Color__new(rand()%255, rand()%255, rand()%255);
-    return gb_Asteroid__new(p, c, (float)(rand()%5), 200, 0, (float)(rand()%100), rand()%200);
+    return gb_Asteroid__new(p, c, (float)(rand()%5), rand()%100, 0, (float)(rand()%50), rand()%200);
 }
 
 void gb_Asteroid__destroy(Asteroid_t **obj) {

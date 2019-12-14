@@ -9,8 +9,8 @@
  * Define como é um ponto de localização no plano cartesiano do jogo
  */
 typedef struct Point {
-    double x;
-    double y;
+    float x;
+    float y;
 } Point_t;
 
 /**
@@ -19,7 +19,7 @@ typedef struct Point {
  * @param y Coordenada Y
  * @return Objeto com as coordenadas
  */
-Point_t gb_Point__new(double x, double y);
+Point_t gb_Point__new(float x, float y);
 
 /**
  * Calcula a distancia entre dois pontos
@@ -51,7 +51,7 @@ Point_t gb_Point__sub(Point_t a, Point_t b);
  * @param distance Distância até o novo ponto
  * @return
  */
-Point_t gb_Point__go_headed(Point_t p, double heading, double distance);
+Point_t gb_Point__go_headed(Point_t p, float heading, float distance);
 
 Point_t gb_Point__corrigir_posicao(Point_t *p);
 #endif //GL_BLASTEROIDS_POINT_H

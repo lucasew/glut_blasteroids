@@ -36,6 +36,6 @@ float gb_Object__get_damage(Packet_t *p) {
 }
 
 void gb_Object__hurt(Packet_t *p, float amount) {
-    printf("Enviando %.1f de dano a %s\n", amount, p->fn->type);
+    //printf("Enviando %.1f de dano a %s\n", amount, p->fn->type);
     return p->fn->hurt(p->payload, amount);
 }

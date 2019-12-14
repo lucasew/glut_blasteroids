@@ -16,6 +16,11 @@ extern int SCREEN_WIDTH;
 extern int SCREEN_HEIGHT;
 
 /**
+ * Atualizações de estado por segundo
+ */
+int FPS;
+
+/**
  * Tempo de cada frame, delay usado entre cada iteração do jogo.
  */
 float tick_size;

@@ -7,7 +7,7 @@
 #include "math_utils.h"
 #include "constants.h"
 
-Point_t gb_Point__new(double x, double y) {
+Point_t gb_Point__new(float x, float y) {
     struct Point ret = {
             .x = x,
             .y = y
@@ -35,7 +35,7 @@ double gb_Point__get_distance(Point_t a, Point_t b) {
     return sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2));
 }
 
-Point_t gb_Point__go_headed(Point_t p, double heading, double distance) {
+Point_t gb_Point__go_headed(Point_t p, float heading, float distance) {
     p.x += sin(gb_deg2rad(heading))*distance;
     p.y -= cos(gb_deg2rad(heading))*distance;
     gb_Point__corrigir_posicao(&p);

@@ -27,7 +27,7 @@ Bullet_t* gb_Bullet__new(Point_t position, Color_t color, float speed, float hea
 
 Bullet_t* gb_Bullet__from_ship(Spaceship_t* ship) {
     Color_t color = gb_Color__new(rand()%256, rand()%256, rand()%256);
-    return gb_Bullet__new(ship->position, color, (float)(rand()%200), ship->heading, rand()%100);
+    return gb_Bullet__new(ship->position, color, (float)(rand()%100), ship->heading, rand()%100);
 }
 
 void gb_Bullet__destroy(Bullet_t **obj) {
