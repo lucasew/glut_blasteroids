@@ -104,7 +104,7 @@ void ticker(int v) {
     if (stop) {
         return;
     }
-    glutTimerFunc((unsigned int)(tick_size()*1000), ticker, 0); // Fica se chamando infinitamente, bendito scheduler do glut <3
+    glutTimerFunc((unsigned int)(tick_size*1000), ticker, 0); // Fica se chamando infinitamente, bendito scheduler do glut <3
     gb_lock();
     gb_ObjectList__tick_all(elements);
     gb_unlock();
@@ -114,7 +114,7 @@ void ticker(int v) {
 float asteroid_spawn_secs = 10;
 void asteroid_spawner(int v) {
     int tick = 1*FPS*1000;
-    glutTimerFunc((unsigned int)((float)(tick) * tick_size()), asteroid_spawner, 0);
+    glutTimerFunc((unsigned int)((float)(tick) * tick_size), asteroid_spawner, 0);
     gb_lock();
         gb_ObjectList__push(elements, gb_Asteroid__as_packet(gb_Asteroid__new_random()));
     gb_unlock();
