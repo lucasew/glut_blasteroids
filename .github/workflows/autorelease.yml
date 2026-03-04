@@ -40,10 +40,10 @@ jobs:
             echo "Changes detected after codegen. Creating PR..."
             git config --global user.name "github-actions[bot]"
             git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git checkout -b auto-codegen-${GITHUB_SHA::7}
+            git checkout -b "auto-codegen-${GITHUB_SHA::7}"
             git commit -am "chore: update codegen artifacts"
-            git push origin auto-codegen-${GITHUB_SHA::7} || true
-            gh pr create --title "chore: update codegen artifacts" --body "Automated PR to update codegen artifacts." --base ${GITHUB_REF#refs/heads/} --head auto-codegen-${GITHUB_SHA::7} || true
+            git push origin "auto-codegen-${GITHUB_SHA::7}" || true
+            gh pr create --title "chore: update codegen artifacts" --body "Automated PR to update codegen artifacts." --base "${GITHUB_REF#refs/heads/}" --head "auto-codegen-${GITHUB_SHA::7}" || true
           else
             echo "No changes detected after codegen."
           fi
@@ -57,7 +57,7 @@ jobs:
       - name: Release
         if: github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/')
         run: |
-          gh release create ${GITHUB_REF#refs/tags/} --generate-notes
+          gh release create "${GITHUB_REF#refs/tags/}" --generate-notes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
