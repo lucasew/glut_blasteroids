@@ -27,28 +27,36 @@ typedef struct Asteroid {
 } Asteroid_t;
 
 /**
- * Cria um novo objeto asteroide passando os dados do mesmo
- * @param position Posição do objeto
- * @param color Cor do objeto
- * @param scale Tamanho do objeto em vezes o tamanho original
- * @param rot_velocity Velocidade de rotação do objeto
- * @param heading Para onde o objeto aponta, no caso, onde ele começa apontando
- * @param speed Velocidade do objeto
- * @param health HP do objeto
- * @return O objeto construido
+ * Aloca dinamicamente e inicializa um novo objeto Asteróide com os dados fornecidos.
+ * A memória é alocada via `calloc` e o chamador passa a ser dono do ponteiro retornado.
+ *
+ * @param position Posição inicial no espaço 2D
+ * @param color Cor RGB para o polígono desenhado
+ * @param scale Fator de escala base que afeta o tamanho e o raio de colisão do objeto
+ * @param rot_velocity Velocidade angular de rotação
+ * @param heading Ângulo de rotação inicial para onde o objeto aponta
+ * @param speed Velocidade linear de deslocamento
+ * @param health Pontos de vida do asteroide (determina se ele continua válido)
+ * @return Ponteiro alocado para a nova instância de Asteroid_t, ou NULL em caso de falha
  */
 Asteroid_t* gb_Asteroid__new(Point_t position, Color_t color, float scale, float rot_velocity, float heading, float speed, float health);
 
 /**
- * Cria um novo objeto asteroide utilizando parâmetros aleatórios
- * @return O objeto asteroide
+ * Cria um objeto asteróide atuando como um obstáculo imprevisível gerando
+ * parâmetros aleatórios, incluindo posição de spawn dentro dos limites da tela,
+ * cor RGB, tamanho, velocidade, saúde e rotação.
+ *
+ * @return Um novo ponteiro alocado de Asteroid_t.
  */
 Asteroid_t* gb_Asteroid__new_random();
 
 /**
- * Dar dano se a distancia entre objetos for menor que
- * @param this O objeto em que essa info vai ser obtida
- * @return Quantidade mínima de pixels de distância entre outro objeto
+ * Calcula dinamicamente o raio da 'hitbox' do asteroide baseado no
+ * seu atributo 'scale'. É usado pelo gerenciador de colisões para
+ * verificar intersecção com naves, balas e outros asteroides.
+ *
+ * @param this O objeto do asteroide sendo testado
+ * @return O valor do raio efetivo de colisão deste objeto em pixels.
  */
 float gb_Asteroid__get_danger_radius(Asteroid_t *this);
 
@@ -60,8 +68,11 @@ float gb_Asteroid__get_danger_radius(Asteroid_t *this);
 int gb_Asteroid__is_valid(Asteroid_t *a);
 
 /**
- * Destroi o objeto Asteroide
- * @param obj O ponteiro do objeto a ser destruido
+ * Libera de forma segura a memória alocada do objeto asteroide
+ * e zera o seu ponteiro (anulação `*obj = NULL`) para evitar acessos
+ * inválidos posteriores (dangling pointers).
+ *
+ * @param obj Endereço do ponteiro do asteroide a ser desalocado
  */
 void gb_Asteroid__destroy(Asteroid_t **obj);
 
@@ -72,9 +83,11 @@ void gb_Asteroid__destroy(Asteroid_t **obj);
 void gb_Asteroid__draw(Asteroid_t *this);
 
 /**
- * Atualiza o estado utilizando a velocidade de seguir e rotação por n ticks
- * @param this O objeto a ser atualizado
- * @param step Quantidade de ticks a serem percorridos
+ * Avança o estado espacial do asteroide (posição e rotação angular)
+ * linearmente ao longo do tempo. Leva em consideração o tempo decorrido no
+ * último frame global (`tick_size`).
+ *
+ * @param this O asteroide alvo da atualização
  */
 void gb_Asteroid__update(Asteroid_t *this);
 

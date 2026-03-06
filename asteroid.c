@@ -41,7 +41,6 @@ void gb_Asteroid__update(Asteroid_t *this) {
 }
 
 float gb_Asteroid__get_danger_radius(Asteroid_t *this) {
-    // TODO: Tunar
     return 22*this->scale;
 }
 
