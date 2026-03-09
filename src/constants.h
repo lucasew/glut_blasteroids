@@ -18,11 +18,11 @@ extern int SCREEN_HEIGHT;
 /**
  * Atualizações de estado por segundo
  */
-int FPS;
+extern int FPS;
 
 /**
  * Tempo de cada frame, delay usado entre cada iteração do jogo.
  */
-float tick_size;
+extern float tick_size;
 
 #endif //GL_BLASTEROIDS_CONSTANTS_H
