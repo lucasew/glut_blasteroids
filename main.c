@@ -13,6 +13,7 @@
 #include "asteroid.h"
 #include "bullet.h"
 #include "main.h"
+#include "error_reporter.h"
 
 
 pthread_mutex_t lock;
@@ -137,7 +138,10 @@ void gb_unlock() {
  */
 int main(int argc, char **argv) {
     srand(time(NULL)); // Adicionando bagunça nisso
-    assert(!pthread_mutex_init(&lock, NULL));
+    if (pthread_mutex_init(&lock, NULL) != 0) {
+        report_error("Failed to initialize mutex");
+        exit(1);
+    }
     elements = gb_ObjectList__new();
     spaceship = gb_Spaceship__new_random();
     spaceship->position.x = 200;

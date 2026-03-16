@@ -94,7 +94,7 @@ void gb_Spaceship__destroy(Spaceship_t **ship);
  */
 void gb_Spaceship__draw(Spaceship_t *ship);
 
-Methods_t spaceship_methods;
+extern Methods_t spaceship_methods;
 /**
  * Encapsula o objeto nave em um objeto pacote, gambiarra de interface
  * @param obj Objeto nave a ser encapsulado

@@ -1,0 +1,1 @@
+- 2026-03-16: Medium - Unchecked allocations and asserts with side-effects that get compiled out in release builds, fixed by introducing centralized error reporting.

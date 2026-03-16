@@ -12,11 +12,15 @@
 #include "object.h"
 #include "spaceship.h"
 #include "constants.h"
+#include "error_reporter.h"
 
 
 Bullet_t* gb_Bullet__new(Point_t position, Color_t color, float speed, float heading, float power) {
    Bullet_t* ret = calloc(1, sizeof(Bullet_t));
-   assert(ret);
+   if (!ret) {
+       report_error("Failed to allocate Bullet_t");
+       exit(1);
+   }
    ret->color = color;
    ret->position = position;
    ret->heading = heading;

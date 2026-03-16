@@ -8,9 +8,14 @@
 
 #include "object_list.h"
 #include "bullet.h"
+#include "error_reporter.h"
 
 ObjectList_t **gb_ObjectList__new() {
     ObjectList_t ** ret = malloc(sizeof(ObjectList_t*));
+    if (!ret) {
+        report_error("Failed to allocate ObjectList pointer array");
+        exit(1);
+    }
     *ret = NULL;
     return ret;
 }
@@ -23,10 +28,16 @@ int gb_ObjectList__push(ObjectList_t **this, Packet_t pkt) {
             .this = calloc(1, sizeof(Packet_t)),
             .next = NULL
     };
-    assert(toadd.this);
+    if (!toadd.this) {
+        report_error("Failed to allocate Packet_t");
+        exit(1);
+    }
     *toadd.this = pkt;
     ObjectList_t* toaddptr = calloc(1, sizeof(ObjectList_t));
-    assert(toaddptr);
+    if (!toaddptr) {
+        report_error("Failed to allocate ObjectList_t");
+        exit(1);
+    }
     *toaddptr = toadd;
     toaddptr->next = *this;
     *this = toaddptr;
@@ -70,7 +81,10 @@ int gb_ObjectList__check_collision(ObjectList_t **this) {
     }
     int collisions = 0;
     ObjectList_t *dummy = *this;
-    assert(dummy != NULL);
+    if (dummy == NULL) {
+        report_error("dummy in check_collision is NULL");
+        return 0;
+    }
     int i = 0;
     for (ObjectList_t *inner = dummy; inner != NULL; inner = inner->next) {
         int j = 0;
