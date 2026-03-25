@@ -80,6 +80,11 @@ void gb_Spaceship__cmd_right(Spaceship_t *ship) {
     ship->heading -= spaceship_heading_step;
 }
 
+/**
+ * No-op polymorphic update handler. Spaceship ticks are skipped because
+ * its movement is synchronously handled by input-driven `cmd_*` calls
+ * rather than automated tick logic.
+ */
 void nop(void* ptr, float n){}
 
 float gb_Spaceship__get_damage(Spaceship_t *ship) {

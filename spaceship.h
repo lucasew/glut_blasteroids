@@ -9,17 +9,20 @@
 #include "object.h"
 
 /**
- * Quantos graus a nave vira por cada vez que o botão é apertado?
+ * Fixed angle (in degrees) by which the spaceship rotates per user turn input.
  */
 extern const float spaceship_heading_step;
 
 /**
- * Quantos pixels a nave vai deslocar a cada vez que o botão é apertado
+ * Discrete positional delta applied per movement frame when navigating.
  */
 extern const float spaceship_speed;
 
 /**
- * Define a estrutura de dados da nave
+ * Core entity state for the player.
+ * Implements the Object polymorphic interface (`spaceship_methods`) allowing it to be
+ * managed generically. Its positional state is manually driven by explicit user input
+ * rather than automatic per-tick updates.
  */
 typedef struct Spaceship {
     Color_t color;
@@ -29,56 +32,46 @@ typedef struct Spaceship {
 } Spaceship_t;
 
 /**
- * Cria o objeto nave
- * @param position Posição inicial da nave
- * @param color Cor da nave
- * @param heading Direção para onde a nave está apontada
- * @param health HP da nave
- * @return O objeto nave com os dados indicados
+ * Allocates and initializes a new Spaceship entity.
+ * Expects manual input events to drive positional updates in the core game loop.
  */
 Spaceship_t* gb_Spaceship__new(Point_t position, Color_t color, float heading, float health);
 
 /**
- * Cria um novo objeto nave randômico
- * @return
+ * Spawns a new Spaceship at a random screen coordinate with a random RGB color,
+ * 0 heading, and 100 base health.
  */
 Spaceship_t* gb_Spaceship__new_random();
 
 /**
- * Obtém o raio de perigo do objeto nave
- * @param ship Objeto nave a ser consultado
- * @return O raio de perigo
+ * Resolves the fixed collision bounds for the Spaceship.
+ * Symmetrical collision logic is assumed across all entity types.
  */
 double gb_Spaceship__get_danger_radius(Spaceship_t *ship);
 
 /**
- * Verifica se o objeto aínda é válido, ex: se não foi destruído
- * @param ship Nave a ser verificada
- * @return A nave aínda é válida?
+ * Verifies validity by checking if the entity retains positive health.
+ * Failed checks flag the object for Garbage Collection in the object list.
  */
 int gb_Spaceship__is_valid(Spaceship_t *ship);
 
 /**
- * Interpreta o comando de seta para baixo
- * @param ship Nave a ser controlada
+ * Applies a discrete backwards positional translation (-speed) relative to the current heading vector.
  */
 void gb_Spaceship__cmd_down(Spaceship_t *ship);
 
 /**
- * Interpreta o comando de seta para a esquerda
- * @param ship Nave a ser controlada
+ * Rotates the entity heading leftwards by the discrete step angle (+degrees).
  */
 void gb_Spaceship__cmd_left(Spaceship_t *ship);
 
 /**
- * Interpreta o comando de seta para a direita
- * @param ship Nave a ser controlada
+ * Rotates the entity heading rightwards by the discrete step angle (-degrees).
  */
 void gb_Spaceship__cmd_right(Spaceship_t *ship);
 
 /**
- * Interpreta o comando de seta para cima
- * @param ship Nave a ser controlada
+ * Applies a discrete forward positional translation (+speed) relative to the current heading vector.
  */
 void gb_Spaceship__cmd_up(Spaceship_t *ship);
 
